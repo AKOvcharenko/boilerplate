@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { REQUEST_STATES } from '../../consts'; // src folder should be set up as a root folder in webpack
+import { REQUEST_STATES } from 'consts';
 
 import {
     clearUsers,

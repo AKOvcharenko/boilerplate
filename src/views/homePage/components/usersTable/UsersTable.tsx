@@ -1,36 +1,42 @@
 import { Table, Button, Space } from 'antd';
 import React, { FC, useCallback } from 'react';
 
-import { useEffectOnce } from '../../../../hooks';
-import { REQUEST_STATES } from '../../../../consts';
-import { useReduxDispatch, useReduxSelector } from '../../../../store';
-import { clearUsersAction, fetchUsers } from '../../../../store/usersSlice';
+import { useEffectOnce } from 'hooks';
+import { REQUEST_STATES } from 'consts';
+import { useReduxDispatch, useReduxSelector } from 'store';
+import { clearUsersAction, fetchUsers } from 'store/usersSlice';
 
 import { columns } from './columns';
+import styles from './UsersTable.module.css';
 
 const isLoading = (status: REQUEST_STATES) => status === REQUEST_STATES.PENDING;
 
 export const UsersTable: FC = () => {
     const dispatch = useReduxDispatch();
     const { users, loading } = useReduxSelector((state) => state.usersSlice);
-    const fetchUsersData = useCallback(() => dispatch(fetchUsers([]) as any), []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fetchUsersData = useCallback(() => dispatch(fetchUsers()as any), []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const clearUsersData = useCallback(() => dispatch(clearUsersAction()), []);
 
     useEffectOnce(fetchUsersData);
 
     const isLoadingUsers = isLoading(loading);
     return (<>
-        <Space wrap={true} align='end' >
-            <Button type="primary" loading={isLoadingUsers} onClick={fetchUsersData}>
-                Fetch Users 
-            </Button>
-            <Button danger={true} onClick={clearUsersData}>Clear users info</Button>
-        </Space>
+        <div className={styles.userTableButtons}>
+            <Space>
+                <Button type="primary" loading={isLoadingUsers} onClick={fetchUsersData}>
+                    Fetch Users 
+                </Button>
+                <Button danger={true} onClick={clearUsersData}>Clear users info</Button>
+            </Space>
+        </div>          
         <Table
             columns={columns}
-            rowKey={(record) => record.phone}
+            pagination={false}
             dataSource={users}
             loading={isLoadingUsers}
+            rowKey={(record) => record.phone}
         />
     </>    
     );

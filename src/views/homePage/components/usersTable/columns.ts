@@ -1,6 +1,6 @@
 import type { ColumnsType } from 'antd/es/table';
 
-import { User } from '../../../../store/usersSlice/model';
+import { User } from 'store/usersSlice/model';
 
 export const columns: ColumnsType<User> = [
     {
@@ -13,10 +13,6 @@ export const columns: ColumnsType<User> = [
     {
         title: 'Gender',
         dataIndex: 'gender',
-        filters: [
-        { text: 'Male', value: 'male' },
-        { text: 'Female', value: 'female' },
-        ],
         width: '20%',
     },
     {

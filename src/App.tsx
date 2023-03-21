@@ -9,7 +9,9 @@ import { Home } from './views/homePage';
 const App = () => {
   return (
     <Provider store={store}>
-      <Home />
+      <div className="boilerplate-app">
+        <Home />
+      </div>
     </Provider>
   );
 }

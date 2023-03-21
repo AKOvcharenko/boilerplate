@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { REQUEST_STATES } from '../../../consts'; // src folder should be set up as a root folder in webpack
+import { REQUEST_STATES } from 'consts';
 
 import { UsersState, User } from '../model';
 
