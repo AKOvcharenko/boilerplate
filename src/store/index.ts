@@ -1,5 +1,5 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+import { combineReducers, configureStore, ThunkDispatch, AnyAction } from '@reduxjs/toolkit';
 
 import { usersSlice } from './usersSlice';
 import { setCustomAxiosHeader } from './middlewares';
@@ -16,6 +16,6 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export const useReduxDispatch = (): AppDispatch => useDispatch<AppDispatch>();
-export const useReduxSelector: TypedUseSelectorHook<RootState> = useSelector;
+export type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

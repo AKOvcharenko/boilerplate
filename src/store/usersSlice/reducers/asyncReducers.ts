@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { REQUEST_STATES } from 'consts';
 
 import { UsersState, User } from '../model';
@@ -9,9 +8,9 @@ export const fetchUsersStart = (
 
 export const fetchUsersSuccess = (
     state: UsersState,
-    action: any,
+    { payload }: { payload: User[] },
 ): UsersState => {
-    return { ...state, loading: REQUEST_STATES.SUCCESS, users: action.payload }
+    return { ...state, loading: REQUEST_STATES.SUCCESS, users: payload }
 };
 
 export const fetchUsersFail = (

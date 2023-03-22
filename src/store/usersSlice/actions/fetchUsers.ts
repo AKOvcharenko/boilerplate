@@ -1,16 +1,13 @@
 import axios from 'axios';
-import { createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { ENDPOINTS } from 'consts';
 
-import { User } from '../model';
-
-export const fetchUsers = createAsyncThunk<
-    AnyAction,
-    undefined
->('users/fetchUsers', async () => {
+export const fetchUsers = createAsyncThunk(
+    'users/fetchUsers',
+    async ({ usersNumber }: { usersNumber: number }) => {
     try {
-        const response = await axios.get(`${ENDPOINTS.USERS}?results=10`); // this query param should be taken as func argument
+        const response = await axios.get(`${ENDPOINTS.USERS}?results=${usersNumber}`);
         const { data } = response;
         return data?.results ?? [];
     } catch (error) {
