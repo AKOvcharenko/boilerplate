@@ -1,6 +1,6 @@
-import { PayloadAction, CaseReducer } from '@reduxjs/toolkit';
+import { CaseReducer } from '@reduxjs/toolkit';
 
-import { User, UsersState } from '../model';
+import { UsersState } from '../model';
 
 export const clearUsers: CaseReducer<UsersState> = (state) => {
     state = {
